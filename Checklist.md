@@ -1,14 +1,14 @@
 ## Checklist For The Refactored Progress
-- [ ] data_collection
-	- [ ] testArchive
-	- [ ] 10-31-23
-	- [ ] 10-24-23
-	- [ ] 10-23-23
+- [x] data_collection
+	- [x] testArchive
+	- [x] 10-31-23
+	- [x] 10-24-23
+	- [x] 10-23-23
 - [ ] depth_tests_12-10
-	- [ ] depth_fill.png
-	- [ ] depth_standard.png
+	- [x] depth_fill.png
+	- [x] depth_standard.png
 	- [ ] depth_test_image.py
-	- [ ] image.png
+	- [x] image.png
 - [ ] Hierarchical-Localization
 - [ ] myenv
 - [ ] New Files
