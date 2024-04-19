@@ -59,7 +59,7 @@ in the future when we inevitably pass it on.
 - [ ] output.txt
 - [ ] output_relation.csv
 - [ ] READ_ME_requirements.txt
-- [ ] relation.py
+- [x] relation.py
 - [ ] requirements.txt
 - [ ] rm_versions.sh
 - [ ] street_image.py
