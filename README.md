@@ -12,6 +12,5 @@ in the future when we inevitably pass it on.
 **Old Code Base:** [Here](https://drive.google.com/file/d/1MFZpc6wPdFgUKO2ngvbvKa_0UebA4hJU/view?usp=drive_link) <br>
 ![Screenshot 2024-04-12 155450](https://github.com/ISL-INTELLIGENT-SYSTEMS-LAB/objDetection-refactor/assets/78773029/c379147f-742a-458d-ac9a-d41efb75c852) <br>
 
-## Referenced Repositories
-https://github.com/cvg/Hierarchical-Localization
-![image](https://github.com/ISL-INTELLIGENT-SYSTEMS-LAB/objDetection-refactor/assets/78773029/4e094647-ae1a-4e76-a70a-5cc7dd5832bb)
+### Referenced Repositories
+[Hierarchical-Localization](https://github.com/cvg/Hierarchical-Localization)
