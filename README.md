@@ -4,68 +4,6 @@ will work with each other (what data will be processed, the return values, docum
 Level-2 Data flow diagram showing its inner workings, and a few other things). The sole reason we are 
 performing this is to make the program more streamlined along with making it more understandable for people 
 in the future when we inevitably pass it on.
-
-## Checklist For The Refactored Progress
-- [ ] data_collection
-	- [ ] testArchive
-	- [ ] 10-31-23
-	- [ ] 10-24-23
-	- [ ] 10-23-23
-- [ ] depth_tests_12-10
-	- [ ] depth_fill.png
-	- [ ] depth_standard.png
-	- [ ] depth_test_image.py
-	- [ ] image.png
-- [ ] Hierarchical-Localization
-- [ ] myenv
-- [ ] New Files
-	- [ ] box3d.py
-	- [ ] data_collection.py
-	- [ ] loss_function.py
-	- [ ] network_relation.py
-	- [ ] utils.py
-- [ ] newenv
-- [ ] OldFiles
-	- [ ] Old_NetworkRelation_Scripts
-		- [ ] network_relation.py
-		- [ ] utils.py
-	- [ ] data collection console command
-	- [ ] data_collection.py
-	- [ ] network_relation.py
-	- [ ] utils.py
-- [ ] Spatial Mapping
-	- [ ] glad.c
-	- [ ] mesh_gen.mtl
-	- [ ] mesh_gen.obj
-	- [ ] mesh_gen_material0000_map_Kd.png
-	- [ ] spatial_map.py
-	- [ ] spatial_test.py
-	- [ ] viewer.py
-- [ ] accuracy_test.py
-- [ ] box3d.py
-- [ ] data_collection.py
-- [ ] data_collection.py.save
-- [ ] data_collection_NEW.py
-- [ ] data_collection_NEW_SocketVersion.py
-- [ ] data_collection_topy.py
-- [ ] datacollection_server.py
-- [ ] DONOTUSE_network_relation1.py
-- [ ] hungarian.py
-- [ ] loss_function.py
-- [ ] multi_camera.py
-- [ ] network_relation.py
-- [ ] network_relation_MOD.py
-- [ ] nums_from_string.py
-- [ ] output.txt
-- [ ] output_relation.csv
-- [ ] READ_ME_requirements.txt
-- [x] relation.py
-- [ ] requirements.txt
-- [ ] rm_versions.sh
-- [ ] street_image.py
-- [ ] ubuntu@10.52.13.114
-- [ ] utils.py
-- [ ] video_capturing.py
 <br><br>
 
 ## Files That Exceed Github's File Size Limits
