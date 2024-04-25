@@ -34,7 +34,7 @@
 	- [ ] spatial_map.py
 	- [ ] spatial_test.py
 	- [ ] viewer.py
-- [ ] accuracy_test.py
+- [x] accuracy_test.py
 - [ ] box3d.py
 - [ ] data_collection.py
 - [ ] data_collection.py.save
