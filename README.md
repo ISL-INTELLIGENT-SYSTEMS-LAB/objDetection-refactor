@@ -21,4 +21,4 @@ in the future when we inevitably pass it on.
 - [@oTinoSan](https://github.com/oTinoSan)
 - [@MrBHerring](https://github.com/MrBHerring)
 - [@TobyyW](https://github.com/TobyyW)
-- [@D4yanna](https://github.com/D4yanna)
+- [@xodezzio](https://github.com/xodezzio)
