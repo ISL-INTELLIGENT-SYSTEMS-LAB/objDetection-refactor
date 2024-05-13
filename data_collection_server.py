@@ -90,34 +90,33 @@ def create_experiment_directory():
     # return the path
     return experiment_dir_path
 
-
-# Function to create a dated directory for the current experiment
+# Function to create a dated directory for the current dataframe from relation
 def create_dataframe_directory():
     """
-    This function creates a new directory for each experiment inside the 'collection' directory. 
-    The name of the experiment directory is 'experiment_' followed by the current date.
+    This function creates a new directory for each dataframe inside the 'collection' directory. 
+    The name of the dataframe directory is 'dataframe_' followed by the current date.
     
     Parameters: None
     
     Returns:
-    str: The absolute path to the newly created experiment directory.
+    str: The absolute path to the newly created dataframe directory.
     
     The function first calls the 'create_collection_dir' function to get the path to the 'collection' directory.
     It then gets the current date and formats it as 'YYYY-MM-DD' using the datetime.now().strftime function.
-    The name of the experiment directory is created by joining 'experiment_' with the current date.
-    The path to the experiment directory is created by joining the 'collection' directory path with the experiment name.
-    The os.makedirs function is used to create the experiment directory. The exist_ok parameter is set to True, 
+    The name of the dataframe directory is created by joining 'dataframe_' with the current date.
+    The path to the dataframe directory is created by joining the 'collection' directory path with the dataframe name.
+    The os.makedirs function is used to create the dataframe directory. The exist_ok parameter is set to True, 
     which means that the function will not raise an error if the directory already exists.
-    Finally, the function returns the path to the experiment directory.
+    Finally, the function returns the path to the dataframe directory.
     """
     # Create the path to the 'collection' directory
     collection_path = create_collection_dir()
     # Get the current date
     current_date = datetime.now().strftime("%Y-%m-%d")
-    # Create a directory for the current experiment inside 'collected_data'
+    # Create a directory for the current dataframe inside 'collected_data'
     network_relation = f'dataframe_{current_date}'
     dataframe_dir_path = os.path.join(collection_path, network_relation)
-    # Create the experiment directory if it doesn't exist
+    # Create the dataframe directory if it doesn't exist
     os.makedirs(dataframe_dir_path, exist_ok=True)
     # return the path
     return dataframe_dir_path
