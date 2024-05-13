@@ -542,30 +542,7 @@ def transmit_data(df, filename, server_address):
     print(f"Transmitted file: '{filename}'.")        
     # Print a message indicating that the connection was terminated
     print(f"Terminated connection to server {server_address}.\n")   
-
-
-# Function to collect and process data from the ZED camera
-
-def send_data_to_server(serialized_data, server_ip, server_port):
-    """
-    Sends serialized data to the server.
-
-    Parameters:
-    serialized_data (bytes): Serialized data to send.
-    server_ip (str): IP address of the server.
-    server_port (int): Port number of the server.
-    """
-    # Create a socket object
-    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    # Connect to the server
-    client_socket.connect((server_ip, server_port))
-
-    # Send the data
-    client_socket.sendall(serialized_data)
-
-    # Close the socket
-    client_socket.close()
+    
 
 def collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock, stop, server_address, nano_id):
     """

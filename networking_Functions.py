@@ -1,14 +1,27 @@
-import socket
-import pandas as pd
-import os
-import threading
-from io import StringIO
-import netifaces
+import cv2
+import datetime
 import ipaddress
-from datetime import datetime
-import traceback
+import math
+import nmap
+import numpy as np
+import os
+import pandas as pd
+import pickle
+import pytz
+import pyzed.sl as sl
+import socket
 import sys
+import threading
+import time
+import traceback
+from io import StringIO
+import netifaces as ni
 
+##########################
+#### Sever Functions #####
+##########################
+
+# Function to get the local IP address of the server
 def get_server_ip():
     """
     Retrieves the local IP address of the machine running the script on the '192.168.0.0/24' network.
@@ -117,3 +130,128 @@ def start_server():
         client_socket.send(f'\nConnected to server {server_address}.'.encode('ascii'))
         # Start a new thread to handle the client connection
         threading.Thread(target=handle_client, args=(client_socket, client_address)).start()
+
+##########################
+#### Client Functions ####
+##########################
+
+def get_client_ip(network_interface='wlan0'):
+    """
+    Gets the client's IP address.
+
+    Parameters:
+    network_interface (str): The name of the network interface to check (default is 'wlan0').
+
+    Returns:
+    str: The client's IP address, or None if the interface does not have an IPv4 address.
+    """
+    try:
+        # Get the IP address of the network interface
+        ip_address = ni.ifaddresses(network_interface)[ni.AF_INET][0]['addr']
+        two_digit_ip = ip_address.split('.')[-1]
+        return ip_address, two_digit_ip
+    
+    except ValueError:
+        print(f"No IP address found for interface {network_interface}")
+        return None
+
+# Function to get the network CIDR for a specific network interface
+def get_network_cidr(interface_name='wlan0'):
+    """
+    Returns the network in CIDR notation for a specific network interface.
+    
+    Parameters:
+    interface_name (str): The name of the network interface to check (default is 'wlan0').
+    """
+    # Get the network addresses for the specified interface
+    addresses = ni.ifaddresses(interface_name)
+    # If the interface has an IPv4 address
+    if ni.AF_INET in addresses:
+        # Get the IPv4 address
+        for link in addresses[ni.AF_INET]:
+            # Get the IP address and netmask
+            ip = link['addr']
+            netmask = link['netmask']
+            # Calculate the network CIDR
+            network = ipaddress.IPv4Network(f"{ip}/{netmask}", strict=False)
+            return str(network)
+
+    return None
+
+def get_server_address(client_ip):
+    """
+    Retrieves the IP addresses of all devices in the same network using nmap and prompts the user to choose one.
+
+    Parameters:
+    network (str): The network in CIDR notation.
+
+    Returns:
+    str: The chosen IP address.
+    """
+    while True:
+        network = get_network_cidr(interface_name='wlan0')
+        nm = nmap.PortScanner()
+        nm.scan(hosts=network, arguments='-sn')
+        ips = [host for host in nm.all_hosts()]
+        print(f"\n*** Found {len(ips)} devices in your network. ***\n"
+            "Please select a Server IP from the following list or press 's' to scan again:")
+        for i, ip in enumerate(ips):
+            print(f"\t{i + 1}) {ip}")
+        choice = input("Enter a Server IP address list number or 's' to scan again: ")
+        if choice.lower() == 's':
+            continue
+        else:
+            choice = int(choice) - 1
+            ip_address = ips[choice]
+            port = 16666
+            print(f"\nClient IP: {client_ip}, Server IP: {ip_address}")
+            return (ip_address, port)
+
+# Function to send the DataFrame to another device running the server script
+def transmit_data(df, filename, server_address):
+    """
+    Transmits a DataFrame to a server.
+
+    Parameters:
+    df (pd.DataFrame): The DataFrame to be transmitted.
+    filename (str): The filename to prepend to the DataFrame.
+
+    Returns: None
+
+    The function first defines the server address and port. It then converts the DataFrame to JSON, prepends the filename, and encodes the data as bytes.
+    It creates a new socket, connects to the server, and receives a message from the server, which it prints.
+    It then enters a while loop that continues until all data has been sent. Inside the loop, it sends the remaining data, checks if any data was sent, and updates the total amount of data sent.
+    If no data was sent, it raises a RuntimeError.
+    After all data has been sent, it prints a message indicating that the file was transmitted and that the connection was terminated.
+    """
+    
+    # Convert the DataFrame to JSON and prepend the filename
+    data = filename + '|||' + df.to_json()
+    # Encode the data as bytes
+    data_bytes = data.encode()
+    
+    # Create a new socket
+    with socket.socket() as s:
+        # Connect to the server
+        s.connect(server_address)
+        # Receive a message from the server
+        msg = s.recv(1024)
+        # Print the message
+        print(msg.decode('ascii'))
+        
+        # Initialize the total amount of data sent
+        total_sent = 0
+        # Continue sending data until all data has been sent
+        while total_sent < len(data_bytes):
+            # Send the remaining data
+            sent = s.send(data_bytes[total_sent:])
+            # If no data was sent, raise an exception
+            if sent == 0:
+                raise RuntimeError("Socket connection broken")
+            # Update the total amount of data sent
+            total_sent += sent
+            
+    # Print a message indicating that the file was transmitted
+    print(f"Transmitted file: '{filename}'.")        
+    # Print a message indicating that the connection was terminated
+    print(f"Terminated connection to server {server_address}.\n")   
