@@ -33,6 +33,25 @@ from pytorch3d.ops import box3d_overlap
 
 cwd = os.getcwd()
 
+def generate_Relation(expPath=cwd):
+	expPath =  expPath 
+	files = os.listdir(expPath)
+	# Remove files that don't start with 'data'
+	files = [file for file in files if file.startswith('data')]
+
+  # Prints out the files in the list post removal
+	for file in files:
+		print(file)
+
+def main():
+  # Experiment Path listed below is for testing purposes
+  expPath = os.path.join(cwd, 'data_collection', '10-24-23', 'Exp10A')
+	generate_Relation(expPath)
+
+
+if __name__ == '__main__':
+	main()
+  
 
 def generate_Relation(expPath=cwd, n=0):
 	"""

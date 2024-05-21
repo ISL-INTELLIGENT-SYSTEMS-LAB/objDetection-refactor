@@ -13,7 +13,7 @@
 - [ ] myenv
 - [ ] New Files
 	- [ ] box3d.py
-	- [ ] data_collection.py
+	- [x] data_collection.py
 	- [ ] loss_function.py
 	- [ ] network_relation.py
 	- [ ] utils.py
