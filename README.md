@@ -22,3 +22,66 @@ in the future when we inevitably pass it on.
 - [@MrBHerring](https://github.com/MrBHerring)
 - [@TobyyW](https://github.com/TobyyW)
 - [@xodezzio](https://github.com/xodezzio)
+
+# Installation Guide
+
+This guide provides detailed instructions for setting up the necessary environment and dependencies for your project on a Jetson device.
+
+## Prerequisites
+
+Ensure that your system has the following:
+- A compatible Jetson device (e.g., Jetson Nano, TX2)
+- Access to terminal with admin (sudo) permissions
+
+## Setup Instructions
+
+### Step 1: System Dependencies
+
+To update your system and install necessary packages such as `nmap`, open a terminal and execute the following commands:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y nmap
+```
+
+### Step 2: Python Environment Setup
+
+Activate your Python virtual environment and install the required Python packages using:
+
+```bash
+source /home/jetson/Environments/multirobot_env/bin/activate
+pip install -r requirements.txt
+```
+
+### Step 3: ZED SDK Installation
+
+To install the ZED SDK on your Jetson device, follow these steps:
+
+1. **Download the SDK**:
+   - Visit the [Stereolabs developers release page](https://www.stereolabs.com/developers/release).
+   - Download the ZED SDK for JetPack 4.6.X (L4T 32.7) 4.1 suitable for Jetson Nano, TX2/TX2 NX, and CUDA 10.2. Ensure the file has a `.sh` extension.
+
+2. **Prepare the Installation**:
+   - Transfer the downloaded `.sh` file to your Jetson device, preferably in your project directory.
+
+3. **Install the SDK**:
+   - Navigate to the directory containing the downloaded file.
+   - Make the installer executable and start the installation process by running:
+   
+   ```bash
+   sudo chmod +x [Downloaded_SDK_file].sh
+   ./[Downloaded_SDK_file].sh
+   ```
+
+   Replace `[Downloaded_SDK_file]` with the actual name of your downloaded file.
+
+4. **Download the pyzed api
+   -Navigate to directory of ZED SDK installation and run installation program:
+
+    ```bash
+    cd /usr/local/zed/
+    python3 get_python_api.py
+
+## Final Steps
+
+After completing the above steps, ensure that all installations have completed successfully and that the environment variables (if any) are set correctly. Verify the operation of the ZED SDK and `nmap` by running a simple test command or script that uses these tools.
