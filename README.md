@@ -46,10 +46,21 @@ sudo apt-get install -y nmap
 
 ### Step 2: Python Environment Setup
 
-Activate your Python virtual environment and install the required Python packages using:
+Activate your Python virtual environment and install the required Python packages using bash. Make sure to set parameter 'include-system-site-packages' to 'true'. 
 
 ```bash
+cd ~/Environments
+
+python3 -m venv collection_env
+
+cd collection_env
+
+nano pyvenv.cfg
+
+include-system-site-packages = true    #make sure to safe the file
+
 source /home/jetson/Environments/multirobot_env/bin/activate
+
 pip install -r requirements.txt
 ```
 

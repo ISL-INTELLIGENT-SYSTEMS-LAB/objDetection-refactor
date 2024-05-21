@@ -74,7 +74,7 @@ class NetworkRelation:
                 print(self.network_relation())
 
 if __name__ == '__main__':
-    root = "/home/zedgroup/Documents/Turtlebot_Collection/experiment_2024-03-12"  # replace with your actual directory
+    root = "/home/zedgroup/Documents/Turtlebot_Collection/experiment_2024-05-21"  # replace with your actual directory
     files = []  # initially empty, will be filled in main method
     nr = NetworkRelation(root, files)
     nr.main()
