@@ -1,12 +1,22 @@
-# Set up field of operation.
-The field is a 4 x 4 group of the room tiles (standard laminate). The bounding boxes of the tiles should be marked with tape at the corners. The center should be marked with tape, as well as the three positions for the turtlebot data collection. The camera of the turtlebot should meet the edge of their selected location. All locations should be clearly marked and documented with picture. See reference (a).
+## 1. Set up field of operation.
+The field is a 4 x 4 group of the room tiles (standard laminate). The bounding boxes of the tiles should be marked with tape at the corners. The center should be marked with tape, as well as the three positions for the turtlebot data collection. The camera of the turtlebot should meet the edge of their selected location. All locations should be clearly marked and documented with picture. See reference 1.
 
-Additionally, a photograph of the placement of turtlebots and human figures should be photographed. See reference (b).
+![reference 1a](./Diagrams/experiment_references/reference_1a.jpg)
+*reference 1*
 
-# Set up environments and devices.
+Additionally, a photograph of the placement of turtlebots and human figures should be photographed. See reference 2.
+
+![reference 2a](./Diagrams/experiment_references/reference_2a.jpg)
+![reference 2b](./Diagrams/experiment_references/reference_2b.jpg)
+![reference 2c](./Diagrams/experiment_references/reference_2c.jpg)
+![reference 2d](./Diagrams/experiment_references/reference_2d.jpg)
+![reference 2e](./Diagrams/experiment_references/reference_2e.jpg)
+*reference 2*
+
+## 2. Set up environments and devices.
 Using the control computer, enter a directory where the environment will be placed. Create a new environment using venv or other method. Enter the environment. Install the requirements file in the environment. Similar steps are outlined in step 2 of the README.md.
 
-*In venv environment, edit 'pyvenv.cfg'. Change the 'include-system-site-packages' parameter to equal 'true'. Save.
+*In venv environment, edit 'pyvenv.cfg'. Change the 'include-system-site-packages' parameter to equal 'true'. Save.*
 
 ```bash
 cd ~/Environments
@@ -35,11 +45,11 @@ ssh jetson@192.168.0.45
 <install pyzed according to README.md>
 ```
 
-# Run the experiment
+## 3. Run the experiment
 
-Maintain the desired position of the human figures throughout the experiement. Place them in the perimitered location defined in reference (a). 
+Maintain the desired position of the human figures throughout the experiement. Place them in the perimitered location defined in reference 1. 
 
-Place the client computer in the first position from reference (b).
+Place the client computer in the first position from reference 2.
 
 Run the data_collection_server.py program on the control computer and the data_collection_client.py program on the client computer.
 
@@ -47,7 +57,7 @@ Go through the prompts of each program.
 
 Repeat for each of the client computer positions.
 
-# Collect the data
+## 4. Collect the data
 
 The data should have populated in the location mentioned in the data_collection_server.py program. Navigate to the directory to ensure the data populated.
 
