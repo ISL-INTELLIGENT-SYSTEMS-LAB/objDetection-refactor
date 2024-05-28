@@ -73,8 +73,16 @@ class NetworkRelation:
                 self.files = [filename for filename in os.listdir(root) if (filename.endswith('.csv') and not filename.startswith('output'))]
                 print(self.network_relation())
 
+import argparse
+
 if __name__ == '__main__':
-    root = "/home/zedgroup/Documents/Turtlebot_Collection/experiment_2024-05-21"  # replace with your actual directory
-    files = []  # initially empty, will be filled in main method
-    nr = NetworkRelation(root, files)
-    nr.main()
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--root', default="/home/zedgroup/Documents/Turtlebot_Collection/experiment_2024-05-21", 
+                                                help='The root directory for the experiment')
+
+        args = parser.parse_args()
+
+        root = args.root
+        files = []  # initially empty, will be filled in main method
+        nr = NetworkRelation(root, files)
+        nr.main()
