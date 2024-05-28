@@ -76,16 +76,19 @@ class NetworkRelation:
 
 if __name__ == '__main__':
         parser = argparse.ArgumentParser()
-        parser.add_argument('--experiment', default="experiment_2024-05-21", 
+        parser.add_argument('--experiment', default=None, 
                                                 help='The experiment directory')
 
         args = parser.parse_args()
 
-        base_dir = "/home/zedgroup/Documents/Turtlebot_Collection/"
-        experiment_dir = args.experiment
+        # Hardcoded root directory
+        base_dir = "/home/zedgroup/Documents/Turtlebot_Collection/experiment_directory"
 
-        # Combine the base directory with the experiment directory
-        root = os.path.join(base_dir, experiment_dir)
+        # If the experiment argument is provided, append it to the base directory
+        if args.experiment:
+                root = os.path.join(base_dir, args.experiment)
+        else:
+                root = base_dir
 
         files = []  # initially empty, will be filled in main method
         nr = NetworkRelation(root, files)
