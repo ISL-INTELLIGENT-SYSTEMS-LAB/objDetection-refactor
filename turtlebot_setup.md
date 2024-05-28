@@ -30,9 +30,69 @@ These steps to [generate a new SSH key are found here](https://docs.github.com/e
 ssh-keygen -t ed25519 -C "your_email@example.com"
 cat ~/.ssh/id_ed25519.pub    #copy output
 ```
-# 4. Install numpy
-The numpy installation is found on [jetson-nano-wheels'
-python3.6-numpy-1.19.4, GitHub repo](https://github.com/jetson-nano-wheels/python3.6-numpy-1.19.4).
+
+# 4. Create environment and install dependencies
+Always work within an environment on the TurtleBots. The goal is to have the turtlebots be completely stable outside of environments. The steps covered here are similar but not identical to the steps in the README.md for [ISL repo OBJDETECTION-REFACTOR](https://github.com/ISL-INTELLIGENT-SYSTEMS-LAB/objDetection-refactor). 
+
+## 1. System Dependencies
+
+To update your system and install necessary packages such as `venv` and `nmap`, open a terminal and execute the following commands:
+
+```bash
+sudo apt-get update
+sudo apt-get install python3-venv
+sudo apt-get install -y nmap
+```
+
+## 2. Python Environment Setup
+
+Always create environments in the Environments directory at home. If there is not an Environments directory, create one. Create and activate your Python virtual environment. Install the required Python packages using bash. Make sure to set parameter 'include-system-site-packages' to 'true', if you would like to system dependencies in your new environment. Below is an example of an environment creation for `collection_env`.
+
+```bash
+cd ~/Environments
+python3 -m venv collection_env
+cd collection_env
+nano pyvenv.cfg    #optional
+include-system-site-packages = true    #make sure to safe the file
+source ~/Environments/collection_env/bin/activate
+```
+
+## 3. Install numpy
+Our `numpy` is currently downloaded from this [Jetson-Nano repo](https://github.com/jetson-nano-wheels/python3.6-numpy-1.19.4#readme).
+
+```bash
+pip install 'https://github.com/jetson-nano-wheels/python3.6-numpy-1.19.4/releases/download/v0.0.2/numpy-1.19.4-cp36-cp36m-linux_aarch64.whl'
+```
+
+## 4. ZED SDK Installation
+
+To install the ZED SDK on your Jetson device, follow these steps:
+
+1. **Download the SDK**:
+   - Visit the [Stereolabs developers release page](https://www.stereolabs.com/developers/release).
+   - Download the ZED SDK for JetPack 4.6.X (L4T 32.7) 4.1 suitable for Jetson Nano, TX2/TX2 NX, and CUDA 10.2. Ensure the file has a `.sh` extension.
+
+2. **Prepare the Installation**:
+   - Transfer the downloaded `.sh` file to your Jetson device.
+
+3. **Install the SDK**:
+   - Navigate to the directory containing the downloaded file.
+   - Make the installer executable and start the installation process by running:
+   
+   ```bash
+   sudo chmod +x [Downloaded_SDK_file].sh
+   ./[Downloaded_SDK_file].sh
+   ```
+
+   Replace `[Downloaded_SDK_file]` with the actual name of your downloaded file.
+
+4. **Download the pyzed api
+   -Navigate to directory of ZED SDK installation and run installation program:
+
+    ```bash
+    cd /usr/local/zed/
+    python3 get_python_api.py
+
 
 # 5. Install TurtleBot dependencies
 Follow the video linked on the first page of the [TurtleBot3 Overview detailing how to setup the Jetson Nano for TurtleBot3](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/#notices).
