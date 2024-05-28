@@ -12,6 +12,7 @@ on the resulting matrix to give a relation with the lowest cost. Such is returne
 import os
 import numpy as np
 import pandas as pd
+import argparse
 import time
 from utils import *
 
@@ -73,16 +74,19 @@ class NetworkRelation:
                 self.files = [filename for filename in os.listdir(root) if (filename.endswith('.csv') and not filename.startswith('output'))]
                 print(self.network_relation())
 
-import argparse
-
 if __name__ == '__main__':
         parser = argparse.ArgumentParser()
-        parser.add_argument('--root', default="/home/zedgroup/Documents/Turtlebot_Collection/experiment_2024-05-21", 
-                                                help='The root directory for the experiment')
+        parser.add_argument('--experiment', default="experiment_2024-05-21", 
+                                                help='The experiment directory')
 
         args = parser.parse_args()
 
-        root = args.root
+        base_dir = "/home/zedgroup/Documents/Turtlebot_Collection/"
+        experiment_dir = args.experiment
+
+        # Combine the base directory with the experiment directory
+        root = os.path.join(base_dir, experiment_dir)
+
         files = []  # initially empty, will be filled in main method
         nr = NetworkRelation(root, files)
         nr.main()
