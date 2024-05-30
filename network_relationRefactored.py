@@ -2,7 +2,10 @@
 This file accepts output csv files from the ZED camera, then uses the class confidence and
 3d bounding box information to create a relation between those detected objects. This is done by
 using a box and class loss method defined by the DETR model. Then, the hungarian algorithm is run
-on the resulting matrix to give a relation with the lowest cost. Such is returned
+on the resulting matrix to give a relation with the lowest cost. The program uses an optional 
+argument for the experiment date. Otherwise, the directory path is a hardcoded variable in main().
+
+ex: $ python3 network_relation.py --experiment 2024-05-28
 
 @file network_relation.py
 @version 11/2/2023
@@ -12,6 +15,7 @@ on the resulting matrix to give a relation with the lowest cost. Such is returne
 import os
 import numpy as np
 import pandas as pd
+import argparse
 import time
 from utils import *
 
@@ -74,7 +78,25 @@ class NetworkRelation:
                 print(self.network_relation())
 
 if __name__ == '__main__':
-    root = "/home/zedgroup/Documents/Turtlebot_Collection/experiment_2024-03-12"  # replace with your actual directory
-    files = []  # initially empty, will be filled in main method
-    nr = NetworkRelation(root, files)
-    nr.main()
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--experiment', default=None, 
+                                                help='The experiment date')
+
+        args = parser.parse_args()
+
+        # get the current user's home directory
+        home_dir = os.path.expanduser('~')
+        exp_home_dir = os.path.join(home_dir, 'Documents/Turtlebot_Collection', args.experiment)
+        
+        # Hardcoded experiment directory
+        base_dir = "/home/zedgroup/Documents/Turtlebot_Collection/2024_01_01"
+
+        # If the experiment argument is provided, append it to the base directory
+        if args.experiment:
+                root = exp_home_dir
+        else:
+                root = base_dir
+
+        files = []  # initially empty, will be filled in main method
+        nr = NetworkRelation(root, files)
+        nr.main()

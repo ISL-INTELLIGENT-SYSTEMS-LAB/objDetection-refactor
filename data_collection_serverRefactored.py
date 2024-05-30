@@ -72,7 +72,7 @@ def create_experiment_directory():
     
     The function first calls the 'create_collection_dir' function to get the path to the 'collection' directory.
     It then gets the current date and formats it as 'YYYY-MM-DD' using the datetime.now().strftime function.
-    The name of the experiment directory is created by joining 'experiment_' with the current date.
+    The name of the experiment directory is created with the current date.
     The path to the experiment directory is created by joining the 'collection' directory path with the experiment name.
     The os.makedirs function is used to create the experiment directory. The exist_ok parameter is set to True, 
     which means that the function will not raise an error if the directory already exists.
@@ -83,7 +83,7 @@ def create_experiment_directory():
     # Get the current date
     current_date = datetime.now().strftime("%Y-%m-%d")
     # Create a directory for the current experiment inside 'collected_data'
-    experiment = f'experiment_{current_date}'
+    experiment = f'{current_date}'
     experiment_dir_path = os.path.join(collection_path, experiment)
     # Create the experiment directory if it doesn't exist
     os.makedirs(experiment_dir_path, exist_ok=True)
