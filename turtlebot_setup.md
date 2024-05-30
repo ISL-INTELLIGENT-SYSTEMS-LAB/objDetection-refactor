@@ -42,6 +42,7 @@ To update your system and install necessary packages such as `venv` and `nmap`, 
 sudo apt-get update
 sudo apt-get install python3-venv
 sudo apt-get install -y nmap
+sudo apt install zstd
 ```
 
 ## 2. Python Environment Setup
@@ -49,6 +50,7 @@ sudo apt-get install -y nmap
 Always create environments in the Environments directory at home. If there is not an Environments directory, create one. Create and activate your Python virtual environment. Install the required Python packages using bash. Make sure to set parameter 'include-system-site-packages' to 'true', if you would like to system dependencies in your new environment. Below is an example of an environment creation for `collection_env`.
 
 ```bash
+mkdir ~/Environments
 cd ~/Environments
 python3 -m venv collection_env
 cd collection_env
@@ -92,8 +94,13 @@ To install the ZED SDK on your Jetson device, follow these steps:
     ```bash
     cd /usr/local/zed/
     python3 get_python_api.py
+    ```
+# 5. Install requirements for project
+Enter environment. Navigate to project directory and run requirements.txt.
+```bash
+pip install -r requirements_client.txt
+```
 
-
-# 5. Install TurtleBot dependencies
+# 6. Install TurtleBot dependencies
 Follow the video linked on the first page of the [TurtleBot3 Overview detailing how to setup the Jetson Nano for TurtleBot3](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/#notices).
 
