@@ -519,7 +519,7 @@ def transmit_data(df, filename, server_address):
             # Connect to the server
             s.connect(server_address)
         except OSError:
-            print(f"Could not connect to server at {server_address}. Please make sure the server is running.")
+            print(f"Could not connect to server at {server_address}. Please make sure the server is running.\n")
             return
 
         # Receive a message from the server
@@ -584,7 +584,7 @@ def collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, po
             df.to_csv(os.path.join(dir_path, f'data_exp_{filename}.csv'))
 
         # Ask the user if they want to quit or continue
-        quit = input("Enter 'q' to quit or any other key to continue: \n")
+        quit = input("Enter 'q' to quit or any other key to continue:\n")
         # If the user entered 'q' or 'Q', set the stop flag to True and return from the function
         if quit.lower() == 'q':
             stop[0] = True
