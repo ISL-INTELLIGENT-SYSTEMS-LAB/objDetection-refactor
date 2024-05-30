@@ -493,25 +493,21 @@ def update_camera(zed, runtime_parameters, stop, lock):
             # Grab the latest image from the ZED camera
             zed.grab(runtime_parameters)
 
-
-# Function to send the DataFrame to another device running the server script
 def transmit_data(df, filename, server_address):
     """
     Transmits a DataFrame to a server.
 
+    This function converts a DataFrame to JSON, encodes it as bytes, and sends it to a server. 
+    If the server is not running or the connection is broken during transmission, an error message is printed.
+
     Parameters:
-    df (pd.DataFrame): The DataFrame to be transmitted.
-    filename (str): The filename to prepend to the DataFrame.
+    df (pandas.DataFrame): The DataFrame to transmit.
+    filename (str): The name of the file to transmit.
+    server_address (tuple): A tuple containing the server's IP address and port number.
 
-    Returns: None
-
-    The function first defines the server address and port. It then converts the DataFrame to JSON, prepends the filename, and encodes the data as bytes.
-    It creates a new socket, connects to the server, and receives a message from the server, which it prints.
-    It then enters a while loop that continues until all data has been sent. Inside the loop, it sends the remaining data, checks if any data was sent, and updates the total amount of data sent.
-    If no data was sent, it raises a RuntimeError.
-    After all data has been sent, it prints a message indicating that the file was transmitted and that the connection was terminated.
+    Returns:
+    None
     """
-    
     # Convert the DataFrame to JSON and prepend the filename
     data = filename + '|||' + df.to_json()
     # Encode the data as bytes
@@ -519,8 +515,13 @@ def transmit_data(df, filename, server_address):
     
     # Create a new socket
     with socket.socket() as s:
-        # Connect to the server
-        s.connect(server_address)
+        try:
+            # Connect to the server
+            s.connect(server_address)
+        except OSError:
+            print(f"Could not connect to server at {server_address}. Please make sure the server is running.")
+            return
+
         # Receive a message from the server
         msg = s.recv(1024)
         # Print the message
@@ -541,8 +542,7 @@ def transmit_data(df, filename, server_address):
     # Print a message indicating that the file was transmitted
     print(f"Transmitted file: '{filename}'.")        
     # Print a message indicating that the connection was terminated
-    print(f"Terminated connection to server {server_address}.\n")   
-    
+    print(f"Terminated connection to server {server_address}.\n")
 
 def collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock, stop, server_address, nano_id):
     """
