@@ -35,25 +35,32 @@ Ensure that your system has the following:
 
 ## Setup Instructions
 
-### Step 1: System Dependencies
+### 1. System Dependencies
 
-To update your system and install necessary packages such as `nmap`, open a terminal and execute the following commands:
+To update your system and install necessary packages such as `venv` and `nmap`, open a terminal and execute the following commands:
 
 ```bash
 sudo apt-get update
+sudo apt-get install python3-venv
 sudo apt-get install -y nmap
 ```
 
-### Step 2: Python Environment Setup
+### 2. Python Environment Setup
 
-Activate your Python virtual environment and install the required Python packages using:
+Always create environments in the Environments directory at home. If there is not an Environments directory, create one. Create and activate your Python virtual environment. Install the required Python packages using bash. Make sure to set parameter 'include-system-site-packages' to 'true', if you would like to have capabilities of the external TurtleBot environment. Our `numpy` is currently downloaded from this [Jetson-Nano repo](https://github.com/jetson-nano-wheels/python3.6-numpy-1.19.4#readme). Below is an example of an environment creation for `collection_env`.
 
 ```bash
-source /home/jetson/Environments/multirobot_env/bin/activate
+cd ~/Environments
+python3 -m venv collection_env
+cd collection_env
+nano pyvenv.cfg    #optional
+include-system-site-packages = true    #make sure to safe the file
+source ~/home/jetson/Environments/multirobot_env/bin/activate
+pip install 'https://github.com/jetson-nano-wheels/python3.6-numpy-1.19.4/releases/download/v0.0.2/numpy-1.19.4-cp36-cp36m-linux_aarch64.whl'
 pip install -r requirements.txt
 ```
 
-### Step 3: ZED SDK Installation
+### 3. ZED SDK Installation
 
 To install the ZED SDK on your Jetson device, follow these steps:
 
